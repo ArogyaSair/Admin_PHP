@@ -116,18 +116,19 @@ session_start();
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Enter Name</label>
                 <div class="col-md-9">
-                <input class="form-control" type="text" name="name" placeholder="Enter Hospital name" required oninvalid="this.setCustomValidity('Please enter Hospital name')" oninput="this.setCustomValidity('')">
-                <div class="invalid-feedback">
+                    <input class="form-control" type="text" name="name" placeholder="Enter Hospital name" required
+                        oninvalid="this.setCustomValidity('Please enter Hospital name')"
+                        oninput="this.setCustomValidity('')">
+                    <div class="invalid-feedback">
                         Please provide name.
                     </div>
-            </div>
+                </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Enter Email</label>
                 <div class="col-md-9">
-                    <input class="form-control" type="text" name="email" placeholder="Enter Hospital email ID"
-                        required>
-                        <div class="invalid-feedback">
+                    <input class="form-control" type="text" name="email" placeholder="Enter Hospital email ID" required>
+                    <div class="invalid-feedback">
                         Please provide email.
                     </div>
                 </div>
@@ -137,7 +138,7 @@ session_start();
                 <div class="col-md-9">
                     <input class="form-control" type="text" name="password" placeholder="Create password for hispital"
                         required>
-                        <div class="invalid-feedback">
+                    <div class="invalid-feedback">
                         Please provide password.
                     </div>
                 </div>
@@ -155,17 +156,17 @@ session_start();
                 <label class="col-md-3 mt-3">Select State</label>
                 <div class="col-md-9">
                     <select class="form-select select2 form-control" onChange="getCity()" name="state"
-                        style="width: 100%; height: 36px;" id="state" required>
+                        style="width: 100%; height: 36px;" id="stateSelect" required>
                         <option>Select State</option>
                         <?php
-                        foreach($DatabaseState as $key=>$data){
-                            ?>
+                    foreach($DatabaseState as $key=>$data){
+                        ?>
                         <option value="<?=$data['StateName']?>"><?=$data['StateName']?></option>
                         <?php
-                        }
-                    ?>
+                    }
+                ?>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" id="stateError">
                         Please provide state.
                     </div>
                 </div>
@@ -173,7 +174,8 @@ session_start();
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Select City</label>
                 <div class="col-md-9">
-                    <select class="select2 form-select" required name="city" id="city" style="width: 100%; height: 36px;">
+                    <select class="select2 form-select" required name="city" id="city"
+                        style="width: 100%; height: 36px;">
                     </select>
                     <div class="invalid-feedback">
                         Please provide city.
@@ -253,16 +255,17 @@ session_start();
                             }
                         }
                         </script>
-                        <input type="file" name="f1" class="custom-file-input form-control" required onchange="previewImage(event)"
-                            id="validatedCustomFile" />
-                            <div class="invalid-feedback">
-                        Please provide image.
-                    </div>
+                        <input type="file" name="f1" class="custom-file-input form-control" required
+                            onchange="previewImage(event)" id="validatedCustomFile" />
+                        <div class="invalid-feedback">
+                            Please provide image.
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="custom-file">
-                        <img src="Images\NoImage.jpeg.jpg" id="preview" name="DatabaseImage" alt="" width=200px height=140px>
+                        <img src="Images\NoImage.jpeg.jpg" id="preview" name="DatabaseImage" alt="" width=200px
+                            height=140px>
                     </div>
                 </div>
             </div>
@@ -277,26 +280,41 @@ session_start();
 
 
 <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
+document.querySelector('form')
+    .addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    });
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
+function validateForm() {
+    var stateSelect = document.getElementById("stateSelect");
+    var stateError = document.getElementById("stateError");
 
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
+    if (stateSelect.value === "Select State") {
+        stateError.style.display = "block";
+        return false;
+    } else {
+        stateError.style.display = "none";
+        return true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('.needs-validation');
+
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity() || !validateForm()) {
+            event.preventDefault();
+            event.stopPropagation();
         }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+        form.classList.add('was-validated');
+    }, false);
+});
 </script>
+
+
 
 <?php include_once("Footer.php");?>
