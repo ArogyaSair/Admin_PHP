@@ -92,9 +92,22 @@ foreach($datalist2 as $data)
                                         class="mdi mdi-account me-1 ms-1"></i>Welcome, <?=$_SESSION['name']?> </a>
                                 <a class="dropdown-item" href="MyProfile.php"><i
                                         class="mdi mdi-account me-1 ms-1"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="mdi mdi-wallet me-1 ms-1"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="mdi mdi-email me-1 ms-1"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                        class="mdi mdi-settings me-1 ms-1"></i> Account
+                                    Setting</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off me-1 ms-1"></i>
                                     Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="ps-4 p-10">
+                                    <a href="javascript:void(0)"
+                                        class="btn btn-sm btn-success btn-rounded text-white">View Profile</a>
+                                </div>
                             </ul>
                         </li>
                     </ul>
@@ -112,6 +125,30 @@ foreach($datalist2 as $data)
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.php"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="mdi mdi-account me-1 ms-1"></i><span
+                                    class="hide-menu">Admin
+                                </span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <?php
+                                    if($count < 1){
+                                        ?>
+                                <li class="sidebar-item">
+                                    <a href="addAdmin.php" class="sidebar-link">
+                                        <i class="mdi mdi-account-plus"></i>
+                                        <span class="hide-menu"> Add </span>
+                                    </a>
+                                </li>
+                                <?php
+                                    }
+                                ?>
+                                <li class="sidebar-item">
+                                    <a href="adminView.php" class="sidebar-link"><i class="mdi mdi-eye"></i><span
+                                            class="hide-menu"> View </span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
@@ -201,7 +238,23 @@ foreach($datalist2 as $data)
                                 </li>
                             </ul>
                         </li>
-                            <li class="sidebar-item">
+                       
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
+                                    class="hide-menu">Disease</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="DiseaseAddView.php" class="sidebar-link">
+                                        <i class="mdi mdi-hospital"></i>
+                                        <span class="hide-menu"> Add </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                       
+                       
+                        <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="helpDesk.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Help Desk</span></a>
                             </li>
                         </li>
