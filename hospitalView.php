@@ -46,6 +46,7 @@ session_start();
                                 <th>Hospital Name</th>
                                 <th>Available Doctors</th>
                                 <th>Available Facilities</th>
+                                <th>Available Disease</th>
                                 <th>Address</th>
                                 <th>Available Treatments</th>
                                 <th>Operations</th>
@@ -68,6 +69,7 @@ session_start();
                                 <td><?=$row['HospitalName'];?></td>
                                 <td><?=$row['AvailableDoctors']?></td>
                                 <td><?=$row['AvailableFacilities']?></td>
+                                <td><?=$row['AvailableDisease']?></td>
                                 <td><?=$row['HospitalAddress']?>, <?=$row['HospitalCity']?>, <?=$row['HospitalState']?></td>
                                 <td><?=$row['AvailableTreatments'];?></td>
                                 <td>

@@ -6,6 +6,7 @@ session_start();
     $DatabaseState = $database->getReference('ArogyaSair/tblStates')->getSnapshot()->getValue();
     $DatabaseCity = $database->getReference('ArogyaSair/tblCity')->getSnapshot()->getValue();
     $DatabaseTreatment = $database->getReference('ArogyaSair/AllTreatment')->getSnapshot()->getValue();
+    $DatabaseDisease = $database->getReference("ArogyaSair/tblDisease")->getSnapshot()->getValue();
     $DatabaseDoctors = $database->getReference('ArogyaSair/AllDoctor')->getSnapshot()->getValue();
 
     use Kreait\Firebase\Factory;
@@ -23,13 +24,13 @@ session_start();
         $datalist=$database->getReference($url)->getSnapshot()->getValue();
         $ExplodTreatments = explode(",",$datalist['AvailableTreatments']);
         $TreatmentSize = sizeof($ExplodTreatments)-1;
+        $ExplodDisease = explode(",",$datalist['AvailableDisease']);
+        $DiseaseSize = sizeof($ExplodDisease)-1;
         $ExplodDoctors = explode(",",$datalist['AvailableDoctors']);
         $DoctorSize = sizeof($ExplodDoctors)-1;
-
         $ExplodServices = explode(",",$datalist['AvailableFacilities']);
         $ServiceSize = sizeof($ExplodServices)-1;
         
-        // Retriving image from database
         $file1=$datalist['Photo'];
         $path="HospitalImage/$file1";
         $object = $bucket->object($path);
@@ -49,6 +50,7 @@ session_start();
         $facility="";
         $doctor = "";
         $treatment="";
+        $Disease = "";
         if (isset($_POST['facility'])) {
             $Facilities = $_POST['facility'];
             foreach ($Facilities as $Facility) {
@@ -67,6 +69,12 @@ session_start();
                 $doctor = $doctors .", ". $doctor;
             }
         }
+        if (isset($_POST['Disease'])) {
+            $Diseases = $_POST['Disease'];
+            foreach ($Diseases as $diseases) {
+                $Disease = $diseases .", ". $Disease;
+            }
+        }
         // Image inserting in database folder
         if($_FILES['f1']['name']){
             $bucket->upload(
@@ -76,8 +84,6 @@ session_start();
                 ]
             );
         }
-
-        // If image is not selected for update then keep the previous image else get the new one
         if($_FILES['f1']['name']){
             $bucket->upload(
                 file_get_contents($_FILES['f1']['tmp_name']),
@@ -99,6 +105,7 @@ session_start();
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
                 'AvailableDoctors'=>$doctor,
+                'AvailableDisease'=>$Disease,
                 'Photo'=>$photo,
             ]);
         } else {
@@ -110,6 +117,7 @@ session_start();
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
                 'AvailableDoctors'=>$doctor,
+                'AvailableDisease'=>$Disease,
             ]);
         }
         header("location:hospitalView.php");
@@ -184,13 +192,34 @@ session_start();
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-3 mt-3">Select Available Disease</label>
+                <div class="col-md-9">
+                    <select class="select2 form-select shadow-none mt-3" name="Disease[]" multiple
+                        style="height: 36px; width: 100%">
+                        <?php
+                            for($i=0;$i<$DiseaseSize;$i++){
+                                $datalist['AvailableDisease']=$ExplodDisease[$i];
+                                ?>
+                        <option value="<?=$ExplodDisease[$i]?>" selected><?=$ExplodDisease[$i]?></option>
+                        <?php
+                            }
+                            foreach($DatabaseDisease as $data){
+                                ?>
+                        <option value="<?=$data['DiseaseName']?>"><?=$data['DiseaseName']?></option>
+                        <?php
+                       }
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Treatments</label>
                 <div class="col-md-9">
                     <select class="select2 form-select shadow-none mt-3" name="treatment[]" multiple
                         style="height: 36px; width: 100%">
                         <?php
                             for($i=0;$i<$TreatmentSize;$i++){
-                                $t['AvailableTreatments']=$ExplodTreatments[$i];
+                                $AvailableTreatments['AvailableTreatments']=$ExplodTreatments[$i];
                                 ?>
                         <option value="<?=$ExplodTreatments[$i]?>" selected><?=$ExplodTreatments[$i]?></option>
                         <?php

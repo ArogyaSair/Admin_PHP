@@ -8,6 +8,7 @@ session_start();
         $id=$_REQUEST['id'];
         $url="ArogyaSair/tblDisease/$id";
         $record=$database->getReference($url)->remove();
+        header("location:DiseaseAddView.php");
     }
     if(isset($_REQUEST['btnSubmit']))
     {
@@ -63,7 +64,7 @@ session_start();
                             <tr>
                                 <td><?=$row['DiseaseName'];?></td>
                                 <td>
-                                    <a class="delete" href="DiseasAddView.php?id=<?php echo $key?>" onclick="return confirm('Are you sure you want to delete <?=$row['DiseaseName'];?> Disease ?');"><i class="mdi mdi-delete"></i></a>
+                                    <a class="delete" href="DiseaseAddView.php?id=<?php echo $key?>" onclick="return confirm('Are you sure you want to delete <?=$row['DiseaseName'];?> Disease ?');"><i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                             <?php

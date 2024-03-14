@@ -31,6 +31,7 @@ session_start();
     $DatabaseTreatment = $database->getReference('ArogyaSair/AllTreatment')->getSnapshot()->getValue();
     $DatabaseDoctors = $database->getReference('ArogyaSair/AllDoctor')->getSnapshot()->getValue();
     $DatabaseHospital = $database->getReference("ArogyaSair/tblHospital")->getSnapshot()->getValue();
+    $DatabaseDisease = $database->getReference("ArogyaSair/tblDisease")->getSnapshot()->getValue();
 
     use Kreait\Firebase\Factory;
 
@@ -52,6 +53,7 @@ session_start();
         $facility="";
         $doctor = "";
         $treatment="";
+        $Disease = "";
         // Image insert in database in folder
         if($_FILES['f1']['name']){
             $bucket->upload(
@@ -79,6 +81,12 @@ session_start();
                 $doctor = $doctors .", ". $doctor;
             }
         }
+        if (isset($_POST['Disease'])) {
+            $Diseases = $_POST['Disease'];
+            foreach ($Diseases as $diseases) {
+                $Disease = $diseases .", ". $Disease;
+            }
+        }
         $count = 0;
         foreach($DatabaseHospital as $data){
             if(strtolower($data['HospitalName']) == strtolower($name)) 
@@ -101,6 +109,7 @@ session_start();
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
                 'AvailableDoctors'=>$doctor,
+                'AvailableDisease'=>$Disease,
                 'Photo' =>$photo,
             ])->getKey();
             header("location:hospitalView.php");
@@ -156,19 +165,16 @@ session_start();
                 <label class="col-md-3 mt-3">Select State</label>
                 <div class="col-md-9">
                     <select class="form-select select2 form-control" onChange="getCity()" name="state"
-                        style="width: 100%; height: 36px;" id="stateSelect" required>
+                        style="width: 100%; height: 36px;" id="state">
                         <option>Select State</option>
                         <?php
                     foreach($DatabaseState as $key=>$data){
                         ?>
-                        <option value="<?=$data['StateName']?>"><?=$data['StateName']?></option>
+                        <option value="<?=$key?>"><?=$data['StateName']?></option>
                         <?php
                     }
                 ?>
                     </select>
-                    <div class="invalid-feedback" id="stateError">
-                        Please provide state.
-                    </div>
                 </div>
             </div>
             <div class="form-group row">
@@ -182,7 +188,24 @@ session_start();
                     </div>
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-md-3 mt-3">Select Available Diseases</label>
+                <div class="col-md-9">
+                    <select class="select2 form-select shadow-none mt-3" required name="Disease[]" multiple
+                        style="height: 36px; width: 100%">
+                        <?php
+                        foreach($DatabaseDisease as $data){
+                            ?>
+                        <option value="<?=$data['DiseaseName']?>"><?=$data['DiseaseName']?></option>
+                        <?php
+                        }
+                    ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide treatments.
+                    </div>
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Treatments</label>
                 <div class="col-md-9">
