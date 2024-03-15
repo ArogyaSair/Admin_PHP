@@ -27,8 +27,7 @@ foreach($datalist2 as $data)
     <link rel="stylesheet" type="text/css" href="CardView.css" />
 
     <link href="dist/css/style.min.css" rel="stylesheet" />
-    <!-- <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet"> -->
-
+    
 </head>
 
 <body>
@@ -252,8 +251,19 @@ foreach($datalist2 as $data)
                                 </li>
                             </ul>
                         </li>
-                       
-                       
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
+                                    class="hide-menu">Specilization</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="SpecilizationAddView.php" class="sidebar-link">
+                                        <i class="mdi mdi-hospital"></i>
+                                        <span class="hide-menu"> Add </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                       
                         <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="helpDesk.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Help Desk</span></a>
                             </li>
