@@ -6,14 +6,26 @@ session_start();
         $newPassword = $_POST['password'];
         $cPassword = $_POST['confirm-password'];
         if($newPassword == $cPassword){
-            $id=$_REQUEST['id'];
-            $url="ArogyaSair/tblAdmin/$id";
-            $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $database->getReference($url)->update([
-                "Password"=>$hashPassword
-            ]);
-            echo "<script>alert('Passwords changed successfully..!!')</script>";
-            header("location:login.php");
+            if(isset($_REQUEST['did'])){
+                $id=$_REQUEST['did'];
+                $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                echo "ArogyaSair/tblDoctor/$id";
+                $database->getReference("ArogyaSair/tblDoctor/$id")->update([
+                    "Password"=>$hashPassword
+                ]);
+                echo "<script>alert('Passwords changed successfully..!!')</script>";
+                header("location:login.php");
+            }
+            if(isset($_REQUEST['aid'])){
+                $id=$_REQUEST['aid'];
+                $url="ArogyaSair/tblAdmin/$id";
+                $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $database->getReference($url)->update([
+                    "Password"=>$hashPassword
+                ]);
+                echo "<script>alert('Passwords changed successfully..!!')</script>";
+                header("location:login.php");
+            }
         }else{
             echo "<script>alert('Passwords do not match. Please try again.')</script>";
         }

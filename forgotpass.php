@@ -2,52 +2,105 @@
 session_start();
     require_once('config.php');
     $otp = "";
+    $name = "";
     if(isset($_POST['btnSendOTP'])){
         $adminName = $_POST['name'];
-        $url="ArogyaSair/tblAdmin/";
-        $Email="";
-        $record = $database->getReference($url)->orderByChild('Username')->equalTo($adminName)->getSnapshot()->getValue();
-        foreach($record as $data){
-            $Email = $data['Email'];
+        $name = $adminName;
+        if(str_contains($adminName,"@admin")){
+            $url="ArogyaSair/tblAdmin/";
+            $Email="";
+            $record = $database->getReference($url)->orderByChild('Username')->equalTo($adminName)->getSnapshot()->getValue();
+            foreach($record as $data){
+                $Email = $data['Email'];
+            }
+            $url= "PHPMailer/class.smtp.php";
+            include("$url"); 
+            // optional, gets called from within class.phpmailer.php if not 
+            $url2="PHPMailer/class.phpmailer.php";
+            require_once("$url2");
+            
+            $mail = new PHPMailer(); // create a new object
+            $mail->IsSMTP(); // enable SMTP
+            // $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+            $mail->SMTPAuth = true; // authentication enabled
+            $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+            $mail->Host = "smtp.gmail.com";
+            $mail->Port = 465; // or 587
+            $mail->IsHTML(true);
+            $mail->Username   = "arogyasair@gmail.com";  // GMAIL username
+            $mail->Password   = "nrtj tjtr cfzf yzej";            // GMAIL password
+            
+            $mail->SetFrom("arogyasair@gmail.com");
+            $mail->Subject = "Arogya Sair Admin Password Change Request";
+            $email=$Email;
+            
+            $permitted_chars = '0123456789';
+            $otp=substr(str_shuffle($permitted_chars), 0, 5);
+            $_SESSION['OTP'] = $otp;
+            foreach($record as $key=>$data){
+                $_SESSION['id'] = $key;
+            }
+            
+            //http://127.0.0.1/hope/CodeIgniter-3.1.6//index.php/login_con/resetpass
+            $mail->Body = "Hello OTP is $otp";
+            $mail->AddAddress($email);
+            $mail->Send();
+        }else{
+            $url="ArogyaSair/tblDoctor/";
+            $Email="";
+            $doctorName = "";
+            $record = $database->getReference($url)->orderByChild('Email')->equalTo($adminName)->getSnapshot()->getValue();
+            foreach($record as $data){
+                $Email = $data['Email'];
+                $doctorName = $data["DoctorName"];
+            }
+            $url= "PHPMailer/class.smtp.php";
+            include("$url"); 
+            // optional, gets called from within class.phpmailer.php if not 
+            $url2="PHPMailer/class.phpmailer.php";
+            require_once("$url2");
+            
+            $mail = new PHPMailer(); // create a new object
+            $mail->IsSMTP(); // enable SMTP
+            // $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+            $mail->SMTPAuth = true; // authentication enabled
+            $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+            $mail->Host = "smtp.gmail.com";
+            $mail->Port = 465; // or 587
+            $mail->IsHTML(true);
+            $mail->Username   = "arogyasair@gmail.com";  // GMAIL username
+            $mail->Password   = "nrtj tjtr cfzf yzej";            // GMAIL password
+            
+            $mail->SetFrom("arogyasair@gmail.com");
+            $mail->Subject = "Arogya Sair Doctor Password Change Request";
+            $email=$Email;
+            
+            $permitted_chars = '0123456789';
+            $otp=substr(str_shuffle($permitted_chars), 0, 5);
+            $_SESSION['OTP'] = $otp;
+            foreach($record as $key=>$data){
+                $_SESSION['id'] = $key;
+            }
+            
+            //http://127.0.0.1/hope/CodeIgniter-3.1.6//index.php/login_con/resetpass
+            $mail->Body = "OTP is to change the password for Dr.$doctorName is $otp";
+            $mail->AddAddress($email);
+            $mail->Send();
         }
-        $url= "PHPMailer/class.smtp.php";
-        include("$url"); 
-        // optional, gets called from within class.phpmailer.php if not 
-        $url2="PHPMailer/class.phpmailer.php";
-        require_once("$url2");
-        
-        $mail = new PHPMailer(); // create a new object
-        $mail->IsSMTP(); // enable SMTP
-        // $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-        $mail->SMTPAuth = true; // authentication enabled
-        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 465; // or 587
-        $mail->IsHTML(true);
-        $mail->Username   = "arogyasair@gmail.com";  // GMAIL username
-        $mail->Password   = "nrtj tjtr cfzf yzej";            // GMAIL password
-        
-        $mail->SetFrom("arogyasair@gmail.com");
-        $mail->Subject = "Test Mail";
-        $email=$Email;
-        
-        $permitted_chars = '0123456789';
-        $otp=substr(str_shuffle($permitted_chars), 0, 5);
-        $_SESSION['OTP'] = $otp;
-        foreach($record as $key=>$data){
-            $_SESSION['id'] = $key;
-        }
-        
-        //http://127.0.0.1/hope/CodeIgniter-3.1.6//index.php/login_con/resetpass
-        $mail->Body = "Hello OTP is $otp";
-        $mail->AddAddress($email);
-        $mail->Send();
     }
-    if(isset($_POST['btnVerifyOTP'])){
+    if(isset($_POST['btnVerifyOTPAdmin'])){
         $userOtp = $_POST["OTP"];
-        // $OTP = $otp;
         if($userOtp == $_SESSION['OTP']){
-            header("location:NewPassword.php?id={$_SESSION['id']}");
+            header("location:NewPassword.php?aid={$_SESSION['id']}");
+        }
+        else{
+            echo "<script>alert('Wrong OTP')</script>";
+        }
+    }
+    if(isset($_POST['btnVerifyOTPDoctor'])){
+        $userOtp = $_POST["OTP"];
+        if($userOtp == $_SESSION['OTP']){
+            header("location:NewPassword.php?did={$_SESSION['id']}");
         }
         else{
             echo "<script>alert('Wrong OTP')</script>";
@@ -97,7 +150,7 @@ session_start();
                                                 if(!isset($_POST['btnSendOTP'])){
                                                     ?>
                                                     <div class="text-center mt-3">
-                                                        <span class="text-white">Enter your admin name below for OTP to reset password.</span>
+                                                        <span class="text-white">Enter your admin name / Doctor Email below for OTP to reset password.</span>
                                                     </div>
                                                     <div class="input-group mb-3 mt-3">
                                                         <div class="input-group-prepend">
@@ -117,7 +170,7 @@ session_start();
                                                 }
                                                 ?>
                                                 <?php
-                                                if(isset($_POST['btnSendOTP'])){
+                                                if(isset($_POST['btnSendOTP']) && str_contains($name,"@admin")){
                                                     ?>
                                                         <div class="text-center"><span class="text-white">Enter OTP</span></div>
                                                         <div class="input-group mb-3">
@@ -141,7 +194,35 @@ session_start();
                                                     </div>
                                                     <div class="row mt-3 pt-3 border-top border-secondary">
                                                         <div class="col-12">
-                                                            <input type="submit" value="Verify OTP" class="btn btn-info float-end" name="btnVerifyOTP">
+                                                            <input type="submit" value="Verify OTP" class="btn btn-info float-end" name="btnVerifyOTPAdmin">
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                } else if(isset($_POST['btnSendOTP'])){
+                                                    ?>
+                                                        <div class="text-center"><span class="text-white">Enter OTP</span></div>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-danger text-white h-100"
+                                                                    id="basic-addon1"><i class="mdi mdi-email fs-4"></i></span>
+                                                            </div>
+                                                    <?php
+                                                    foreach($record as $data){
+                                                    ?>
+                                                        <input type="text" class="form-control form-control-lg" placeholder="Your email" aria-label="Username" value="<?=$data['Email']?>" aria-describedby="basic-addon1" readonly />
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text bg-danger text-white h-100" id="basic-addon1"><i class="mdi mdi-key fs-4"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-lg" placeholder="Enter OTP" name="OTP" aria-describedby="basic-addon1" />
+                                                    </div>
+                                                    <div class="row mt-3 pt-3 border-top border-secondary">
+                                                        <div class="col-12">
+                                                            <input type="submit" value="Verify OTP" class="btn btn-info float-end" name="btnVerifyOTPDoctor">
                                                         </div>
                                                     </div>
                                                     <?php
