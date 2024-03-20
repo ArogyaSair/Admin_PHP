@@ -6,7 +6,7 @@ session_start();
     $DatabaseState = $database->getReference('ArogyaSair/tblStates')->getSnapshot()->getValue();
     $DatabaseCity = $database->getReference('ArogyaSair/tblCity')->getSnapshot()->getValue();
     $DatabaseTreatment = $database->getReference('ArogyaSair/AllTreatment')->getSnapshot()->getValue();
-    $DatabaseDisease = $database->getReference("ArogyaSair/tblDisease")->getSnapshot()->getValue();
+    $DatabaseDisease = $database->getReference("ArogyaSair/AllSurgeries")->getSnapshot()->getValue();
     $DatabaseDoctors = $database->getReference('ArogyaSair/AllDoctor')->getSnapshot()->getValue();
 
     use Kreait\Firebase\Factory;
@@ -24,10 +24,10 @@ session_start();
         $datalist=$database->getReference($url)->getSnapshot()->getValue();
         $ExplodTreatments = explode(",",$datalist['AvailableTreatments']);
         $TreatmentSize = sizeof($ExplodTreatments)-1;
-        $ExplodDisease = explode(",",$datalist['AvailableDisease']);
+        $ExplodDisease = explode(",",$datalist['AvailableSurgeries']);
         $DiseaseSize = sizeof($ExplodDisease)-1;
-        $ExplodDoctors = explode(",",$datalist['AvailableDoctors']);
-        $DoctorSize = sizeof($ExplodDoctors)-1;
+        // $ExplodDoctors = explode(",",$datalist['AvailableDoctors']);
+        // $DoctorSize = sizeof($ExplodDoctors)-1;
         $ExplodServices = explode(",",$datalist['AvailableFacilities']);
         $ServiceSize = sizeof($ExplodServices)-1;
         
@@ -104,8 +104,8 @@ session_start();
                 'Email'=>$email,
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
-                'AvailableDoctors'=>$doctor,
-                'AvailableDisease'=>$Disease,
+                // 'AvailableDoctors'=>$doctor,
+                'AvailableSurgeries'=>$Disease,
                 'Photo'=>$photo,
             ]);
         } else {
@@ -116,8 +116,8 @@ session_start();
                 'HospitalCity'=>$city,
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
-                'AvailableDoctors'=>$doctor,
-                'AvailableDisease'=>$Disease,
+                // 'AvailableDoctors'=>$doctor,
+                'AvailableSurgeries'=>$Disease,
             ]);
         }
         header("location:hospitalView.php");
@@ -198,14 +198,14 @@ session_start();
                         style="height: 36px; width: 100%">
                         <?php
                             for($i=0;$i<$DiseaseSize;$i++){
-                                $datalist['AvailableDisease']=$ExplodDisease[$i];
+                                $datalist['AvailableSurgeries']=$ExplodDisease[$i];
                                 ?>
                         <option value="<?=$ExplodDisease[$i]?>" selected><?=$ExplodDisease[$i]?></option>
                         <?php
                             }
                             foreach($DatabaseDisease as $data){
                                 ?>
-                        <option value="<?=$data['DiseaseName']?>"><?=$data['DiseaseName']?></option>
+                        <option value="<?=$data['SurgeryName']?>"><?=$data['SurgeryName']?></option>
                         <?php
                        }
                     ?>
@@ -233,7 +233,7 @@ session_start();
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Doctors</label>
                 <div class="col-md-9">
                 <select class="select2 form-select shadow-none mt-3" name="doctor[]" multiple
@@ -253,7 +253,7 @@ session_start();
                     ?>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Facilities</label>
                 <div class="col-md-9">

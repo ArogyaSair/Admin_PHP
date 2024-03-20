@@ -31,7 +31,7 @@ session_start();
     $DatabaseTreatment = $database->getReference('ArogyaSair/AllTreatment')->getSnapshot()->getValue();
     $DatabaseDoctors = $database->getReference('ArogyaSair/AllDoctor')->getSnapshot()->getValue();
     $DatabaseHospital = $database->getReference("ArogyaSair/tblHospital")->getSnapshot()->getValue();
-    $DatabaseDisease = $database->getReference("ArogyaSair/tblDisease")->getSnapshot()->getValue();
+    $DatabaseDisease = $database->getReference("ArogyaSair/AllSurgeries")->getSnapshot()->getValue();
 
     use Kreait\Firebase\Factory;
 
@@ -108,8 +108,7 @@ session_start();
                 'HospitalCity'=>$city,
                 'AvailableTreatments'=>$treatment,
                 'AvailableFacilities'=>$facility,
-                'AvailableDoctors'=>$doctor,
-                'AvailableDisease'=>$Disease,
+                'AvailableSurgeries'=>$Disease,
                 'Photo' =>$photo,
             ])->getKey();
             header("location:hospitalView.php");
@@ -189,14 +188,14 @@ session_start();
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 mt-3">Select Available Diseases</label>
+                <label class="col-md-3 mt-3">Select Available Surgeries</label>
                 <div class="col-md-9">
                     <select class="select2 form-select shadow-none mt-3" required name="Disease[]" multiple
                         style="height: 36px; width: 100%">
                         <?php
                         foreach($DatabaseDisease as $data){
                             ?>
-                        <option value="<?=$data['DiseaseName']?>"><?=$data['DiseaseName']?></option>
+                        <option value="<?=$data['SurgeryName']?>"><?=$data['SurgeryName']?></option>
                         <?php
                         }
                     ?>
@@ -224,7 +223,7 @@ session_start();
                     </div>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Doctors</label>
                 <div class="col-md-9">
                     <select class="select2 form-select shadow-none mt-3" required multiple
@@ -241,7 +240,7 @@ session_start();
                         Please provide doctors.
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Select Available Facilities</label>
                 <div class="col-md-9">
