@@ -44,9 +44,8 @@ session_start();
                             <tr>
                                 <th>Image</th>
                                 <th>Hospital Name</th>
-                                <th>Available Doctors</th>
+                                <th>Available Surgeries</th>
                                 <th>Available Facilities</th>
-                                <th>Available Disease</th>
                                 <th>Address</th>
                                 <th>Available Treatments</th>
                                 <th>Operations</th>
@@ -67,9 +66,8 @@ session_start();
                                 <td><img src='<?php echo $downloadUrl;?>' style="border-radius: 20px;" width=150px
                                         height=150px /></td>
                                 <td><?=$row['HospitalName'];?></td>
-                                <td><?=$row['AvailableDoctors']?></td>
+                                <td><?=$row['AvailableSurgeries']?></td>
                                 <td><?=$row['AvailableFacilities']?></td>
-                                <td><?=$row['AvailableDisease']?></td>
                                 <td><?=$row['HospitalAddress']?>, <?=$row['HospitalCity']?>, <?=$row['HospitalState']?></td>
                                 <td><?=$row['AvailableTreatments'];?></td>
                                 <td>

@@ -17,7 +17,7 @@
                     if (password_verify($pass, $x['Password'])){
                         $_SESSION['name']=$x['Name'];
                         $_SESSION['username']=$x['Username'];
-                        $_SESSION['id']=$key;
+                        $_SESSION['aid']=$key;
                         header("location:dashboard.php");
                     }
                     else{
@@ -37,7 +37,7 @@
                         if (password_verify($pass, $x['Password'])){
                             $_SESSION['name']=$x['DoctorName'];
                             $_SESSION['username']=$x['Email'];
-                            $_SESSION['id']=$key;
+                            $_SESSION['did']=$key;
                             header("location:DoctorAppointment.php");
                         }
                         else{

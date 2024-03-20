@@ -204,10 +204,10 @@ foreach($datalist2 as $data)
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                                 aria-expanded="false"><i class="me-2 mdi mdi-medical-bag"></i><span
-                                    class="hide-menu">Treatment</span></a>
+                                    class="hide-menu">Surgery</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
-                                    <a href="TreatmentAddView.php" class="sidebar-link">
+                                    <a href="SurgeryAddView.php" class="sidebar-link">
                                         <i class="mdi mdi-hospital"></i>
                                         <span class="hide-menu"> Add </span>
                                     </a>
@@ -228,7 +228,7 @@ foreach($datalist2 as $data)
                             </ul>
                         </li>
                        
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                                 aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
                                     class="hide-menu">Disease</span></a>
@@ -240,7 +240,7 @@ foreach($datalist2 as $data)
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                                 aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
@@ -254,17 +254,22 @@ foreach($datalist2 as $data)
                                 </li>
                             </ul>
                         </li>                       
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="helpDesk.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Help Desk</span></a>
                             </li>
-                        </li>
+                        </li> -->
                                 <?php
                             }else{
                                 ?>
-                                <li class="sidebar-item">
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark" href="DoctorAppointment.php"
                                 aria-expanded="false"><i class="me-2 mdi mdi-medical-bag"></i><span
                                     class="hide-menu">Appointments</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="DoctorSurgery.php"
+                                aria-expanded="false"><i class="me-2 mdi mdi-medical-bag"></i><span
+                                    class="hide-menu">Surgeries</span></a>
                         </li>
                                 <?php
                             }
