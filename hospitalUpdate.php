@@ -192,7 +192,7 @@ session_start();
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 mt-3">Select Available Disease</label>
+                <label class="col-md-3 mt-3">Select Available Surgery</label>
                 <div class="col-md-9">
                     <select class="select2 form-select shadow-none mt-3" name="Disease[]" multiple
                         style="height: 36px; width: 100%">
