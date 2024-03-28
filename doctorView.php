@@ -20,7 +20,7 @@ session_start();
     $existingFile->delete();
     
     $record=$database->getReference($url)->remove();
-    header("location:hospitalView.php"); 
+    header("location:doctorView.php"); 
   }
   $datalist = $database->getReference('ArogyaSair/tblDoctor')->getSnapshot()->getValue();
   include_once("header.php");

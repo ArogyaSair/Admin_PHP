@@ -253,7 +253,20 @@ foreach($datalist2 as $data)
                                     </a>
                                 </li>
                             </ul>
-                        </li>                       
+                        </li>  
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="mdi mdi-stethoscope"></i><span
+                                    class="hide-menu">All Bookings</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="BookingView.php" class="sidebar-link">
+                                        <i class="mdi mdi-eye"></i>
+                                        <span class="hide-menu"> View </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                     
                         <!-- <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="helpDesk.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Help Desk</span></a>
                             </li>

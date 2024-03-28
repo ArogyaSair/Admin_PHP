@@ -3,9 +3,16 @@
 session_start();
 
     require_once("config.php");
-    $DatabaseCity = $database->getReference('ArogyaSair/tblCity')->getSnapshot()->getValue();
-    $DatabaseState = $database->getReference('ArogyaSair/tblStates')->getSnapshot()->getValue();
-    
+    if(isset($_SESSION["DatabaseCity"])){
+        $DatabaseCity = $_SESSION["DatabaseCity"];
+    }else{
+        $DatabaseCity = $database->getReference('ArogyaSair/tblCity')->getSnapshot()->getValue();
+    }
+    if(isset($_SESSION['DatabaseState'])){
+        $DatabaseState = $_SESSION['DatabaseState'];
+    }else{
+        $DatabaseState = $database->getReference('ArogyaSair/tblStates')->getSnapshot()->getValue();
+    }
     if(isset($_POST['btnSubmit'])){
         $cityName = $_POST['name'];
         $stateName = $_POST['state'];

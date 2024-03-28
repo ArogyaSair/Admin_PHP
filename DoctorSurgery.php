@@ -18,7 +18,7 @@ if(isset($_REQUEST["aid"])){
             "Status" => "Complete"
         ]);
     }
-    header("location:DoctorAppointment.php");
+    header("location:DoctorSurgery.php");
 }
 
 $DatabaseSurgery = $database->getReference('ArogyaSair/tblTreatment')->getSnapshot()->getValue();

@@ -2,10 +2,10 @@
 session_start();
     require_once("config.php");    
     if(isset($_POST['btnSubmit'])){
-        $stateName = $_POST['state'];
+        $Specilization = $_POST['Specilization'];
 
         $database->getReference('ArogyaSair/tblSpe')->push([
-            'StateName'=>$Specilization
+            'Specilization'=>$Specilization
         ])->getKey();
         header("location:SpecilizationAddView.php");
     }
@@ -26,7 +26,7 @@ session_start();
             <div class="form-group row">
                 <label class="col-md-3 mt-3">Enter Specilization Name</label>
                 <div class="col-md-9">
-                    <input class="form-control" type="text" name="state" id="name" placeholder="Enter Specilization name" required>
+                    <input class="form-control" type="text" name="Specilization" id="name" placeholder="Enter Specilization name" required>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@ session_start();
                     <table id="zero_config" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>State Name</th>
+                                <th>Specilization Name</th>
                                 <th>Operations</th>
                             </tr>
                         </thead>

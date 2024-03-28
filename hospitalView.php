@@ -22,7 +22,11 @@ session_start();
     $record=$database->getReference($url)->remove();
     header("location:hospitalView.php"); 
   }
-  $datalist = $database->getReference('ArogyaSair/tblHospital')->getSnapshot()->getValue();
+  if(isset($_SESSION["DatabaseHospital"])){
+    $datalist = $_SESSION["DatabaseHospital"];
+  }else{
+    $datalist = $database->getReference('ArogyaSair/tblHospital')->getSnapshot()->getValue();
+  }
   include_once("header.php");
 ?>
 <div class="row">
@@ -47,7 +51,6 @@ session_start();
                                 <th>Available Surgeries</th>
                                 <th>Available Facilities</th>
                                 <th>Address</th>
-                                <th>Available Treatments</th>
                                 <th>Operations</th>
                             </tr>
                         </thead>
@@ -69,7 +72,6 @@ session_start();
                                 <td><?=$row['AvailableSurgeries']?></td>
                                 <td><?=$row['AvailableFacilities']?></td>
                                 <td><?=$row['HospitalAddress']?>, <?=$row['HospitalCity']?>, <?=$row['HospitalState']?></td>
-                                <td><?=$row['AvailableTreatments'];?></td>
                                 <td>
                                     <a class="edit" href="HospitalUpdate.php?id=<?php echo $key?>"><i
                                             class="fa fa-edit"></i></a>
