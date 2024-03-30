@@ -48,9 +48,15 @@
         $mail->Send();
         header("location:dashboard.php");
     }
-    $DatabaseUserQuestion = $database->getReference('ArogyaSair/tblUserQuestions')->getSnapshot()->getValue();
-    $DatabaseTreatment = $database->getReference('ArogyaSair/tblTreatment')->getSnapshot()->getValue();
-    $DatabaseAppointment = $database->getReference('ArogyaSair/tblAppointment')->getSnapshot()->getValue();
+    if(isset($_SESSION["QnA"])){
+        $DatabaseUserQuestion = $_SESSION["QnA"];
+    }
+    if(isset($_SESSION["tblTreatment"])){
+        $DatabaseTreatment = $_SESSION["tblTreatment"];
+    }
+    if(isset($_SESSION["tblAppointment"])){
+        $DatabaseAppointment = $_SESSION["tblAppointment"];
+    }
     include_once("header.php");
 ?>
 <div class="row">

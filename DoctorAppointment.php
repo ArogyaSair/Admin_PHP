@@ -22,7 +22,7 @@ if(isset($_REQUEST["aid"])){
 }
 
 $DatabaseTreatment = $database->getReference('ArogyaSair/tblTreatment')->getSnapshot()->getValue();
-$name="Dr.".$_SESSION['name'];
+$name=$_SESSION['did'];
    
 include_once("header.php");
 
@@ -56,6 +56,7 @@ include_once("header.php");
                                         <p><?php echo "Disease: ".$x["Disease"]; ?></p>
                                         <p><?php echo "Status: ".$x["Status"]; ?></p>
                                         <p><?php echo "Hospital Name: ".$DatabaseHospital["HospitalName"] ?></p>
+                                        <p><?php echo "Visit time: ".$x["VisitingTime"] ?></p>
                                         <a href="DoctorAppointment.php?aid=<?=$key?>" class="btn-success float-start text-white p-2">Complete</a>
                                     </div>
                                 </div>

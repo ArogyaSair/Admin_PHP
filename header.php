@@ -145,12 +145,6 @@ foreach($datalist2 as $data)
                                     class="hide-menu">Doctor</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
-                                    <a href="doctorAdd.php" class="sidebar-link">
-                                        <i class="mdi mdi-hospital"></i>
-                                        <span class="hide-menu"> Add </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
                                     <a href="doctorView.php" class="sidebar-link">
                                         <i class="mdi mdi-eye"></i>
                                         <span class="hide-menu"> View </span>
@@ -163,12 +157,6 @@ foreach($datalist2 as $data)
                                 aria-expanded="false"><i class="mdi mdi-hospital-building"></i><span
                                     class="hide-menu">Hospital</span></a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a href="hospitalAdd.php" class="sidebar-link">
-                                        <i class="mdi mdi-hospital"></i>
-                                        <span class="hide-menu"> Add </span>
-                                    </a>
-                                </li>
                                 <li class="sidebar-item">
                                     <a href="hospitalView.php" class="sidebar-link"><i class="mdi mdi-eye"></i><span
                                             class="hide-menu"> View </span></a>
@@ -227,20 +215,6 @@ foreach($datalist2 as $data)
                                 </li>
                             </ul>
                         </li>
-                       
-                        <!-- <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
-                                    class="hide-menu">Disease</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a href="DiseaseAddView.php" class="sidebar-link">
-                                        <i class="mdi mdi-hospital"></i>
-                                        <span class="hide-menu"> Add </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> -->
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                                 aria-expanded="false"><i class="me-2 mdi mdi-pharmacy"></i><span
