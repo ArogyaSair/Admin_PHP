@@ -38,7 +38,7 @@ include_once("header.php");
                 </div>
                 <?php
                    $now = new DateTime();
-                   $formattedDate = $now->format('d-n-Y');
+                   $formattedDate = $now->format('j-n-Y');
                     foreach($DatabaseSurgery as $key=>$x){
                         if($x["DoctorName"] == $name && $x["DateOfAppointment"]==$formattedDate && $x["Disease"]!="General Checkup")
                         {

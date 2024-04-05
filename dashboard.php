@@ -143,7 +143,7 @@
                                 <div class="card-body" style="background-color: white">
                                     <div class="card1">
                                         <h4><b><?php echo "Hospital Name: ".$DatabaseHospital["HospitalName"]; ?></b></h4>
-                                        <p><?php echo "User Name: ".$DatabaseUser["Name"] ?></p>
+                                        <p><?php echo "User Name: ".$DatabaseUser["FirstName"]." ".$DatabaseUser["LastName"] ?></p>
                                         <p><?php echo "Date: ".$data["AppointmentDate"]; ?></p>
                                         <p><?php echo "Appointment for: ".$data["Disease"]; ?></p>
                                     </div>

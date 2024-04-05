@@ -40,7 +40,7 @@
             $record = $database->getReference($url)->orderByChild('Email')->equalTo($user)->getSnapshot()->getValue();
             if(sizeof($record)>0){
                     foreach($record as $key=>$x){
-                        if ($pass == $x['Password']){
+                        if (password_verify($pass, $x['Password'])){
                             $_SESSION['name']=$x['DoctorName'];
                             $_SESSION['username']=$x['Email'];
                             $_SESSION['did']=$key;
