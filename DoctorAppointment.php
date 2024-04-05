@@ -52,7 +52,7 @@ include_once("header.php");
                                 <div class="card-body" style="background-color: white">
                                     <div class="card1">
                                         <h4><b><?php echo "Date: ".$x["DateOfAppointment"]; ?></b></h4>
-                                        <p><?php echo "Patient Name: ".$DatabaseUser["Name"] ?></p>
+                                        <p><?php echo "Patient Name: ".$DatabaseUser["FirstName"]." ".$DatabaseUser["LastName"] ?></p>
                                         <p><?php echo "Disease: ".$x["Disease"]; ?></p>
                                         <p><?php echo "Status: ".$x["Status"]; ?></p>
                                         <p><?php echo "Hospital Name: ".$DatabaseHospital["HospitalName"] ?></p>
