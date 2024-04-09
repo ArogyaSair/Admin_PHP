@@ -76,7 +76,7 @@
                                 <div class="card-body" style="background-color: white">
                                     <div class="card1">
                                         <h4><b><?php echo "Question: ".$data["Question"]; ?></b></h4>
-                                        <p><?php echo "User Name: ".$DatabaseUser["Name"] ?></p>
+                                        <p><?php echo "User Name: ".$DatabaseUser["FirstName"]." ".$DatabaseUser["LastName"] ?></p>
                                         <p><?php echo "DateTime: ".$data["DateTime"]; ?></p>
                                         <a  class="btn btn-success float-start text-white p-2" href="dashboard.php?id=<?php echo $key?>">Reply</a>
                                     </div>
